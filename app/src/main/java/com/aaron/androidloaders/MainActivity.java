@@ -20,7 +20,7 @@ import com.aaron.androidloaders.model.InTheaters;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<InTheaters>, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<TaskLoaderResult<InTheaters>>, View.OnClickListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -94,15 +94,20 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    public Loader<InTheaters> onCreateLoader(int id, Bundle args) {
+    public Loader<TaskLoaderResult<InTheaters>> onCreateLoader(int id, Bundle args) {
         Log.d(TAG, "onCreateLoader, id " + id);
 
         return new InTheatersTaskLoader(this);
     }
 
     @Override
-    public void onLoadFinished(Loader<InTheaters> loader, InTheaters data) {
-        for(InTheaters.Subject subject : data.getSubjects()) {
+    public void onLoadFinished(Loader<TaskLoaderResult<InTheaters>> loader, TaskLoaderResult<InTheaters> data) {
+        if (data.getException() != null) {
+            Log.e(TAG, data.getException().getMessage());
+            return;
+        }
+
+        for(InTheaters.Subject subject : data.getData().getSubjects()) {
             mData.add(subject.getTitle());
         }
 
@@ -111,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    public void onLoaderReset(Loader<InTheaters> loader) {
+    public void onLoaderReset(Loader<TaskLoaderResult<InTheaters>> loader) {
         Log.d(TAG, "onLoaderReset");
 
         mAdapter.clear();
