@@ -286,3 +286,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 - 异常处理
 
 网络请求都包含异常处理逻辑，这里采用的是单独封装一个TaskResult类。如果抛出以异常，将异常信息set进去，并且data至为null。这时候Activity/Fragment在`onFinished()`中需要对TaskResult进行判断，如果异常信息不为空，进入异常处理逻辑。
+
+## 参考
+
+- [Android Developers API Guideds](http://developer.android.com/guide/components/loaders.html)
+- [Making loading data lifecycle aware](https://medium.com/google-developers/making-loading-data-on-android-lifecycle-aware-897e12760832#.rkjlbux9a)
+- [Android: AsyncTaskLoader Exception Handling](http://blog.gunawan.me/2011/10/android-asynctaskloader-exception.html?m=1)
