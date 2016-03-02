@@ -1,4 +1,4 @@
-# 如何让Android更优雅地异步加载数据
+# Android TaskLoader与LoaderManager，让你更优雅地异步加载数据
 
 ## 1 前面的话
 
