@@ -1,4 +1,4 @@
-# Android TaskLoader与LoaderManager，让你更优雅地异步加载数据
+# Android异步加载数据搭档，TaskLoader与LoaderManager
 
 ## 1 前面的话
 
